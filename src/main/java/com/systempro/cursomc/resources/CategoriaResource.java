@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.systempro.cursomc.domain.Categoria;
 import com.systempro.cursomc.services.CategoriaService;
+import com.systempro.cursomc.services.exceptions.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value="/categorias")
@@ -20,6 +21,11 @@ public class CategoriaResource {
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
 		Categoria obj = service.buscar(id);
+		if(obj == null) { // verificar se identificador existe. caso haja mostra, caso não mostra o erro.
+			
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: "+ id 
+					+ " Tipo: " + Categoria.class.getName());
+		}
 		
 		return ResponseEntity.ok().body(obj);
 		

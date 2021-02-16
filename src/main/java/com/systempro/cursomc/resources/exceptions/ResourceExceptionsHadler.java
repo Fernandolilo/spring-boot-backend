@@ -10,6 +10,7 @@ import com.systempro.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionsHadler {
+	//tratamento de erro de busca por identificador
 
 	@ExceptionHandler(ObjectNotFoundException.class)
 

@@ -5,20 +5,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.systempro.cursomc.domain.Categoria;
 import com.systempro.cursomc.domain.Cliente;
-import com.systempro.cursomc.repositories.CategoriaRepository;
+import com.systempro.cursomc.repositories.ClienteRepository;
 import com.systempro.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class CategoriaService {
+public class ClienteService {
 
 	@Autowired
-	private CategoriaRepository repo;
+	private ClienteRepository repo;
 
-	public Categoria buscar(Integer id) {
+	public Cliente buscar(Integer id) {
 		
-		Optional<Categoria> obj = repo.findById(id);
+		Optional<Cliente> obj = repo.findById(id);
 		
 		if(obj == null) {
 					

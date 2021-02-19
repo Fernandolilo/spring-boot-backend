@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.systempro.cursomc.domain.enums.TipoCliente;
 
@@ -28,18 +29,19 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
-	
-	@JsonManagedReference // apontado para a tabela cliente apenas a serialização de endereço para não gerar conflito
+
+	@JsonManagedReference // apontado para a tabela cliente apenas a serialização de endereço para não
+							// gerar conflito
 	@OneToMany(mappedBy = "cliente") // 1 para muitos
 	private List<Endereco> enderecos = new ArrayList<>();
-	
-	@ElementCollection // gera uma tabela simple 
-	@CollectionTable(name = "telefone") //gera uma tabela simple 
+
+	@ElementCollection // gera uma tabela simple
+	@CollectionTable(name = "telefone") // gera uma tabela simple
 	private Set<String> telefones = new HashSet<>();
-	
+
+	@JsonBackReference // tratamento para impedir conflito de busca por id,
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
-	 
 
 	public Cliente() {
 	}
@@ -110,6 +112,7 @@ public class Cliente implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
@@ -142,7 +145,5 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

@@ -2,6 +2,8 @@ package com.systempro.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -20,32 +23,49 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Date instante;
-	
-	
 
 	// mapeamento bi direciona 1 para 1;
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido") // tratamento para não dar erro de entidade transiente,
 																// quando salvar um pedido e um pagamento
 	private Pagamento pagamento;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	
+
 	@ManyToOne
-	@JoinColumn(name ="endereco_entega_id")
+	@JoinColumn(name = "endereco_entega_id")
 	private Endereco endereco;
+
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Pedido() {
 
 	}
 
-	public Pedido(Integer id, Date instante,  Cliente cliente, Endereco endereco) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco endereco) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cliente = cliente;
 		this.endereco = endereco;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
+	public Date getInstante() {
+		return instante;
+	}
+
+	public void setInstante(Date instante) {
+		this.instante = instante;
 	}
 
 	public Integer getId() {

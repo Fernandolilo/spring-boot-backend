@@ -13,6 +13,7 @@ import com.systempro.cursomc.domain.Cidade;
 import com.systempro.cursomc.domain.Cliente;
 import com.systempro.cursomc.domain.Endereco;
 import com.systempro.cursomc.domain.Estado;
+import com.systempro.cursomc.domain.ItemPedido;
 import com.systempro.cursomc.domain.Pagamento;
 import com.systempro.cursomc.domain.PagamentoBoleto;
 import com.systempro.cursomc.domain.PagamentoCartao;
@@ -25,6 +26,7 @@ import com.systempro.cursomc.repositories.CidadeRepository;
 import com.systempro.cursomc.repositories.ClienteRepository;
 import com.systempro.cursomc.repositories.EnderecoRepository;
 import com.systempro.cursomc.repositories.EstadoRepository;
+import com.systempro.cursomc.repositories.ItemPedidoRepository;
 import com.systempro.cursomc.repositories.PagamentoRepository;
 import com.systempro.cursomc.repositories.PedidoRepository;
 import com.systempro.cursomc.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class CursospringApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;	
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -178,6 +183,18 @@ public class CursospringApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3, ped4, ped5, ped6, ped7));
 		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2, pag3, pag4, pag5, pag6, pag7));
 		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 00.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 }

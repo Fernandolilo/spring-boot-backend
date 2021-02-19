@@ -21,9 +21,9 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
 	@JsonManagedReference //para tratar a busca de produtos apontados para a categoria
 	@ManyToMany(mappedBy = "categorias") // mapeaia o relacionamento
-
 	private List<Produto> produtos = new ArrayList<>();
 
 	public Categoria() {

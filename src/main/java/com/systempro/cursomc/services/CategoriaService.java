@@ -3,12 +3,14 @@ package com.systempro.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.systempro.cursomc.domain.Categoria;
-import com.systempro.cursomc.domain.Cliente;
 import com.systempro.cursomc.repositories.CategoriaRepository;
+import com.systempro.cursomc.services.exceptions.DataIntegrityException;
 import com.systempro.cursomc.services.exceptions.ObjectNotFoundException;
+
 
 @Service
 public class CategoriaService {
@@ -19,12 +21,8 @@ public class CategoriaService {
 	public Categoria find (Integer id) {
 
 		Optional<Categoria> obj = repo.findById(id);
-
-		if (obj == null) {
-
-			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName());
-		}
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
 	public Categoria insert(Categoria obj) {
@@ -37,5 +35,15 @@ public class CategoriaService {
 	public Categoria update (Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+		repo.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e)  {			
+			throw new  DataIntegrityException("Não é possivel excluir uma CATEGORIA, pois possui produtos: ");
+		}
 	}
 }

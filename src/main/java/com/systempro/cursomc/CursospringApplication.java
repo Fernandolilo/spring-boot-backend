@@ -73,23 +73,58 @@ public class CursospringApplication implements CommandLineRunner {
 
 		Categoria cat1 = new Categoria(null, "Informatica");
 		Categoria cat2 = new Categoria(null, "Escritorio");
+		Categoria cat3 = new Categoria(null, "Construcao");
+		Categoria cat4 = new Categoria(null, "Eletrica");
+		Categoria cat5 = new Categoria(null, "Hidraulica");
+		Categoria cat6 = new Categoria(null, "Revestimentos");
+		Categoria cat7 = new Categoria(null, "Ferragem");
+		Categoria cat8 = new Categoria(null, "Madeiras");
 
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
+		Produto p4 = new Produto(null, "Fio 4mm Vermelho Sil", 150.00);
+		Produto p5 = new Produto(null, "Passa fio com alma de aço, 26MTS", 45.00);
+		Produto p6 = new Produto(null, "Cano de esgoto 4P ", 30.00);
+		Produto p7 = new Produto(null, "Cano de agua fria 3/4 Tigre", 26.00);
+		Produto p8 = new Produto(null, "Barra de gerro 8mm, Gerdal", 50.00);
+		Produto p9 = new Produto(null, "Porta Camarão 210 x 70", 410.00);
+		Produto p10 = new Produto(null, "Tabua de pinho 30cm x3.00", 26.00);
+		Produto p11 = new Produto(null, "tijolo de barro 6 furos", 0.70);
+		Produto p12 = new Produto(null, "piso ceramica 60x60 Bege Royal", 26.00);
 
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat3.getProdutos().addAll(Arrays.asList(p11));
+		cat4.getProdutos().addAll(Arrays.asList(p4, p5));
+		cat5.getProdutos().addAll(Arrays.asList(p6, p7));
+		cat6.getProdutos().addAll(Arrays.asList(p12));
+		cat7.getProdutos().addAll(Arrays.asList(p8));
+		cat8.getProdutos().addAll(Arrays.asList(p9, p10));
+		
+		
+		
 
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
-
+		p4.getCategorias().addAll(Arrays.asList(cat4));
+		p5.getCategorias().addAll(Arrays.asList(cat4));
+		p6.getCategorias().addAll(Arrays.asList(cat5));
+		p7.getCategorias().addAll(Arrays.asList(cat5));	
+		p8.getCategorias().addAll(Arrays.asList(cat7));
+		p9.getCategorias().addAll(Arrays.asList(cat8));
+		p10.getCategorias().addAll(Arrays.asList(cat8));
+		p11.getCategorias().addAll(Arrays.asList(cat3));
+		p12.getCategorias().addAll(Arrays.asList(cat6));
+		
+		
+		
 		Estado mg = new Estado(null, "Minas Gerais");
 		Estado sp = new Estado(null, "São Paulo");
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12));
 
 		Cidade cid1 = new Cidade(null, "Uberlandia", mg);
 		Cidade cid2 = new Cidade(null, "Belo Horizonte", mg);

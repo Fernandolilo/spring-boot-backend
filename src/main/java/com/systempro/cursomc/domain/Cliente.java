@@ -23,8 +23,11 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Integer id;
+	
 	private String nome;
+	
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
@@ -50,7 +53,7 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null: tipo.getCod();
 		// armazenamos um numero inteiro, porem feito um tratamento para retornar
 		// um tipo nos get e set alterado. chamando a class enum TipoCliente.
 	}

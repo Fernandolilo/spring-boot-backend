@@ -69,7 +69,7 @@ public class CategoriaResource {
 
 	// metodo de busca por paginas
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-    public ResponseEntity<Page<CategoriaDTO>> findAll(
+    public ResponseEntity<Page<CategoriaDTO>> findPage(
             @RequestParam(value="page", defaultValue="0") Integer page,
             @RequestParam(value="linesPerPAge", defaultValue="24") Integer linesPerPAge,
             @RequestParam(value="orderBy", defaultValue="nome") String orderBy,

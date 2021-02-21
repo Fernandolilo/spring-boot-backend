@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -23,7 +23,7 @@ public class Endereco implements Serializable {
 	private String complemento;
 	private String cep;
 	private String bairro;
-	
+
 	@JsonIgnore // serialização sicrica para não dar conflito de busca
 	@ManyToOne // muitos para 1
 	@JoinColumn(name = "cliente_id")
@@ -33,11 +33,8 @@ public class Endereco implements Serializable {
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
 
-	public Endereco() {
-	}
-
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String cep, String bairro,
-			Cliente cliente, Cidade cidade) {
+			Cliente cliente, Cidade cid) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -46,7 +43,10 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 		this.bairro = bairro;
 		this.cliente = cliente;
-		this.setCidade(cidade);
+
+	}
+	public Endereco() {
+		
 	}
 
 	public Integer getId() {

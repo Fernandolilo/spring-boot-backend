@@ -13,13 +13,12 @@ public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	
-	@NotEmpty(message ="Preenchimento Obrigatorio")
-	@Length(min=5, max = 120 ,message= "Tamanho de caracteres entre 5 e 120")
+	@NotEmpty(message = "Preenchimento Obrigatorio")
+	@Length(min = 5, max = 120, message = "Tamanho de caracteres entre 5 e 120")
 	private String nome;
-	
-	@NotEmpty(message ="Preenchimento Obrigatorio")
-	@Email(message ="Email invalido")
+
+	@NotEmpty(message = "Preenchimento Obrigatorio")
+	@Email(message = "Preenchimento Obrigatorio")
 	private String email;
 
 	public ClienteDTO() {
@@ -32,8 +31,6 @@ public class ClienteDTO implements Serializable {
 		email = obj.getEmail();
 
 	}
-
-	
 
 	public Integer getId() {
 		return id;

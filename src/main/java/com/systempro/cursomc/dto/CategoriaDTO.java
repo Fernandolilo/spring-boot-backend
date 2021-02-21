@@ -42,5 +42,9 @@ public class CategoriaDTO implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

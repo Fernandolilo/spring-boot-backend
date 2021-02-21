@@ -145,16 +145,16 @@ public class CursospringApplication implements CommandLineRunner {
 		clie1.getTelefones().addAll(Arrays.asList("25257000", "27288000"));
 		Cliente clie2 = new Cliente(null, "tania Silva", "tania@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
 		clie2.getTelefones().addAll(Arrays.asList("40002525", "27258484"));
-		Cliente clie3 = new Cliente(null, "Elias Silva", "elias@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
+		Cliente clie3 = new Cliente(null, "Elias Silva", "els@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
 		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
 
 		Cliente clie4 = new Cliente(null, "Elias Silva", "elias@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
 		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
 
-		Cliente clie5 = new Cliente(null, "Elias Silva", "elias@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
+		Cliente clie5 = new Cliente(null, "Elias Silva", "elis@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
 		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
 
-		Cliente clie6 = new Cliente(null, "Elias Silva", "elias@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
+		Cliente clie6 = new Cliente(null, "Elias Silva", "eli@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
 		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
 
 		Endereco e1 = new Endereco(null, "Rua flores da cunha", "56", "a", "Jd Nova Vitoria", "01000-000", clie1, cid1);

@@ -1,5 +1,6 @@
 package com.systempro.cursomc.services.validation;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,34 +18,30 @@ import com.systempro.cursomc.repositories.ClienteRepository;
 import com.systempro.cursomc.resources.exceptions.FieldMessage;
 
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
-	
-	@Autowired
-	private HttpServletRequest resquest;
-	
-	@Autowired
-	ClienteRepository repo;
 
+	@Autowired
+	private HttpServletRequest request;
+	
+	@Autowired
+	private ClienteRepository repo;
+	
 	@Override
 	public void initialize(ClienteUpdate ann) {
 	}
 
 	@Override
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
-
 		
-		// metodo para pegar o ID, de um cliente para verificar se email ja existe.
 		@SuppressWarnings("unchecked")
-		Map<String, String> map = (Map<String, String>) resquest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-		Integer uriId  = Integer.parseInt(map.get("id"));
+		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		Integer uriId = Integer.parseInt(map.get("id"));
 		
 		List<FieldMessage> list = new ArrayList<>();
-
 		
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		if(aux != null && !aux.getId().equals(uriId)) {
-			list.add(new FieldMessage("Email", "Email já existente"));
+		if (aux != null && !aux.getId().equals(uriId)) {
+			list.add(new FieldMessage("email", "Email já existente"));
 		}
-		
 
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();

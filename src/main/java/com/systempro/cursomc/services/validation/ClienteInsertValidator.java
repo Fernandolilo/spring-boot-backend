@@ -16,9 +16,9 @@ import com.systempro.cursomc.resources.exceptions.FieldMessage;
 import com.systempro.cursomc.services.exceptions.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
-	
+
 	@Autowired
-	ClienteRepository repo;
+	private ClienteRepository repo;
 
 	@Override
 	public void initialize(ClienteInsert ann) {
@@ -30,15 +30,16 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		List<FieldMessage> list = new ArrayList<>();
 
 		if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessage("Cpf", "CPF inválido"));
+			list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
 		}
+
 		if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessage("Cnpj", "CNPJ inválido"));
+			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
 		}
-		
+
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		if(aux != null) {
-			list.add(new FieldMessage("Email", "Email já esta cadastrado"));
+		if (aux != null) {
+			list.add(new FieldMessage("email", "Email já existente"));
 		}
 
 		for (FieldMessage e : list) {
@@ -48,5 +49,4 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		}
 		return list.isEmpty();
 	}
-
 }

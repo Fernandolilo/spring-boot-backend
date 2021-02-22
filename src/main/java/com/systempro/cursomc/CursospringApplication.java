@@ -49,20 +49,19 @@ public class CursospringApplication implements CommandLineRunner {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
-	@Autowired
-	private EnderecoRepository enderecoreposytory;
-	
+
 	@Autowired
 	private PedidoRepository pedidoRepository;
-	
+
 	@Autowired
-	private PagamentoRepository pagamentoRepository;	
-	
+	private PagamentoRepository pagamentoRepository;
+
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CursospringApplication.class, args);
 	}
@@ -71,165 +70,108 @@ public class CursospringApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Categoria cat1 = new Categoria(null, "Informatica");
-		Categoria cat2 = new Categoria(null, "Escritorio");
-		Categoria cat3 = new Categoria(null, "Construcao");
-		Categoria cat4 = new Categoria(null, "Eletrica");
-		Categoria cat5 = new Categoria(null, "Hidraulica");
-		Categoria cat6 = new Categoria(null, "Revestimentos");
-		Categoria cat7 = new Categoria(null, "Ferragem");
-		Categoria cat8 = new Categoria(null, "Madeiras");
+		Categoria cat1 = new Categoria(null, "Informática");
+		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "Cama mesa e banho");
+		Categoria cat4 = new Categoria(null, "Eletrônicos");
+		Categoria cat5 = new Categoria(null, "Jardinagem");
+		Categoria cat6 = new Categoria(null, "Decoração");
+		Categoria cat7 = new Categoria(null, "Perfumaria");
 
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
-		Produto p4 = new Produto(null, "Fio 4mm Vermelho Sil", 150.00);
-		Produto p5 = new Produto(null, "Passa fio com alma de aço, 26MTS", 45.00);
-		Produto p6 = new Produto(null, "Cano de esgoto 4P ", 30.00);
-		Produto p7 = new Produto(null, "Cano de agua fria 3/4 Tigre", 26.00);
-		Produto p8 = new Produto(null, "Barra de gerro 8mm, Gerdal", 50.00);
-		Produto p9 = new Produto(null, "Porta Camarão 210 x 70", 410.00);
-		Produto p10 = new Produto(null, "Tabua de pinho 30cm x3.00", 26.00);
-		Produto p11 = new Produto(null, "tijolo de barro 6 furos", 0.70);
-		Produto p12 = new Produto(null, "piso ceramica 60x60 Bege Royal", 26.00);
+		Produto p4 = new Produto(null, "Mesa de escritório", 300.00);
+		Produto p5 = new Produto(null, "Toalha", 50.00);
+		Produto p6 = new Produto(null, "Colcha", 200.00);
+		Produto p7 = new Produto(null, "TV true color", 1200.00);
+		Produto p8 = new Produto(null, "Roçadeira", 800.00);
+		Produto p9 = new Produto(null, "Abajour", 100.00);
+		Produto p10 = new Produto(null, "Pendente", 180.00);
+		Produto p11 = new Produto(null, "Shampoo", 90.00);
 
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
-		cat3.getProdutos().addAll(Arrays.asList(p11));
-		cat4.getProdutos().addAll(Arrays.asList(p4, p5));
-		cat5.getProdutos().addAll(Arrays.asList(p6, p7));
-		cat6.getProdutos().addAll(Arrays.asList(p12));
-		cat7.getProdutos().addAll(Arrays.asList(p8));
-		cat8.getProdutos().addAll(Arrays.asList(p9, p10));
-		
-		
-		
 
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
-		p4.getCategorias().addAll(Arrays.asList(cat4));
-		p5.getCategorias().addAll(Arrays.asList(cat4));
-		p6.getCategorias().addAll(Arrays.asList(cat5));
-		p7.getCategorias().addAll(Arrays.asList(cat5));	
-		p8.getCategorias().addAll(Arrays.asList(cat7));
-		p9.getCategorias().addAll(Arrays.asList(cat8));
-		p10.getCategorias().addAll(Arrays.asList(cat8));
-		p11.getCategorias().addAll(Arrays.asList(cat3));
-		p12.getCategorias().addAll(Arrays.asList(cat6));
-		
-		
-		
-		Estado mg = new Estado(null, "Minas Gerais");
-		Estado sp = new Estado(null, "São Paulo");
+		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
+		cat3.getProdutos().addAll(Arrays.asList(p5, p6));
+		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
+		cat5.getProdutos().addAll(Arrays.asList(p8));
+		cat6.getProdutos().addAll(Arrays.asList(p9, p10));
+		cat7.getProdutos().addAll(Arrays.asList(p11));
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12));
+		p1.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		p2.getCategorias().addAll(Arrays.asList(cat1, cat2, cat4));
+		p3.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		p4.getCategorias().addAll(Arrays.asList(cat2));
+		p5.getCategorias().addAll(Arrays.asList(cat3));
+		p6.getCategorias().addAll(Arrays.asList(cat3));
+		p7.getCategorias().addAll(Arrays.asList(cat4));
+		p8.getCategorias().addAll(Arrays.asList(cat5));
+		p9.getCategorias().addAll(Arrays.asList(cat6));
+		p10.getCategorias().addAll(Arrays.asList(cat6));
+		p11.getCategorias().addAll(Arrays.asList(cat7));
 
-		Cidade cid1 = new Cidade(null, "Uberlandia", mg);
-		Cidade cid2 = new Cidade(null, "Belo Horizonte", mg);
-		Cidade cid3 = new Cidade(null, "Patos de Minas", mg);
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 
-		Cidade sp1 = new Cidade(null, "São Paulo", sp);
-		Cidade sp2 = new Cidade(null, "Sorocaba", sp);
-		Cidade sp3 = new Cidade(null, "Itu", sp);
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
 
-		mg.getCidades().addAll(Arrays.asList(cid1, cid2, cid3));
-		sp.getCidades().addAll(Arrays.asList(sp1, sp2, sp3));
+		Cidade c1 = new Cidade(null, "Uberlândia", est1);
+		Cidade c2 = new Cidade(null, "São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Campinas", est2);
 
-		estadoRepository.saveAll(Arrays.asList(sp, mg));
-		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3, sp1, sp2, sp3));
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Cliente clie1 = new Cliente(null, "Fernando Silva", "fernando@gmail.com", "12312312311",
-				TipoCliente.PESSOAFISICA);
-		clie1.getTelefones().addAll(Arrays.asList("25257000", "27288000"));
-		Cliente clie2 = new Cliente(null, "tania Silva", "tania@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
-		clie2.getTelefones().addAll(Arrays.asList("40002525", "27258484"));
-		Cliente clie3 = new Cliente(null, "Elias Silva", "els@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
-		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
 
-		Cliente clie4 = new Cliente(null, "Elias Silva", "elias@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
-		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
-		Cliente clie5 = new Cliente(null, "Elias Silva", "elis@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
-		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
 
-		Cliente clie6 = new Cliente(null, "Elias Silva", "eli@gmail.com", "12312312311", TipoCliente.PESSOAJURIDICA);
-		clie3.getTelefones().addAll(Arrays.asList("27281000", "40025000"));
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 
-		Endereco e1 = new Endereco(null, "Rua flores da cunha", "56", "a", "Jd Nova Vitoria", "01000-000", clie1, cid1);
-		Endereco e2 = new Endereco(null, "Rua Machado de Assis", "11", " ", "Jd Machado", "01000-000", clie2, cid2);
-		Endereco e3 = new Endereco(null, "Rua Felisberto", "10", "Apartamento 55 - bloco 3", "Jd Felisberto","01000-000", clie3, cid3);
-		Endereco e4 = new Endereco(null, "Rua flores da cunha", "12", "b", "Jd Nova Vitoria", "01000-000", clie4, sp1);
-		Endereco e5 = new Endereco(null, "Rua flores da cunha", "4", " ", "Jd Nova Vitoria", "01000-000", clie5, sp2);
-		Endereco e6 = new Endereco(null, "Rua flores da cunha", "40", " ", "Jd Nova Vitoria", "01000-000", clie6, sp3);
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
-		clie1.getEnderecos().addAll(Arrays.asList(e1));
-		clie2.getEnderecos().addAll(Arrays.asList(e2));
-		clie3.getEnderecos().addAll(Arrays.asList(e3));
-		clie4.getEnderecos().addAll(Arrays.asList(e4));
-		clie5.getEnderecos().addAll(Arrays.asList(e5));
-		clie6.getEnderecos().addAll(Arrays.asList(e6));
-		
-		
-		clienteRepository.saveAll(Arrays.asList(clie1, clie2, clie3, clie4, clie5, clie6));
-		enderecoreposytory.saveAll(Arrays.asList(e1, e2, e3, e4, e5, e6));
-		
-		SimpleDateFormat sdf =  new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		
-		Pedido ped1 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie1, e1);
-		Pedido ped2 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie2, e2);
-		Pedido ped3 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie3, e3);
-		Pedido ped4 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie4, e4);
-		Pedido ped5 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie5, e5);
-		Pedido ped6 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie6, e6);
-		Pedido ped7 = new Pedido(null, sdf.parse("17/02/2021 22:08"),clie1, e2);
-		
-		Pagamento pag1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 6);
-		ped1.setPagamento(pag1);
-		
-		Pagamento pag2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("17/02/2021 22:08"), null);				
-		ped2.setPagamento(pag2);
-		
-		Pagamento pag3 = new PagamentoCartao(null, EstadoPagamento.PENDENTE, ped3, 3);
-		ped3.setPagamento(pag3);
-		
-		Pagamento pag4 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped4, 3);
-		ped4.setPagamento(pag4);
-		
-		Pagamento pag5 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped5, 3);
-		ped5.setPagamento(pag5);
-		
-		Pagamento pag6 = new PagamentoCartao(null, EstadoPagamento.CANCELADO, ped6, 3);
-		ped6.setPagamento(pag6);
-		
-		Pagamento pag7 = new PagamentoCartao(null, EstadoPagamento.CANCELADO, ped7, 3);
-		ped7.setPagamento(pag7);
-		
-		clie1.getPedidos().addAll(Arrays.asList(ped1));
-		clie2.getPedidos().addAll(Arrays.asList(ped2));
-		clie3.getPedidos().addAll(Arrays.asList(ped3));
-		clie4.getPedidos().addAll(Arrays.asList(ped4));
-		clie5.getPedidos().addAll(Arrays.asList(ped5));
-		clie6.getPedidos().addAll(Arrays.asList(ped1));
-		
-		
-		
-		pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3, ped4, ped5, ped6, ped7));
-		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2, pag3, pag4, pag5, pag6, pag7));
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
+
+		Pagamento pagto1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+
+		Pagamento pagto2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"),
+				null);
+		ped2.setPagamento(pagto2);
+
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
-		ItemPedido ip2 = new ItemPedido(ped1, p3, 00.00, 2, 80.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
-		
+
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
-		
+
 		p1.getItens().addAll(Arrays.asList(ip1));
 		p2.getItens().addAll(Arrays.asList(ip3));
 		p3.getItens().addAll(Arrays.asList(ip2));
-		
-		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
-	}
 
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
+
+	}
 }

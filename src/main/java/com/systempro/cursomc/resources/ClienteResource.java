@@ -61,11 +61,11 @@ public class ClienteResource {
 		}
 
 		// metodo de busca por todas categorias
-		@RequestMapping(method = RequestMethod.GET)
+		@RequestMapping(method=RequestMethod.GET)
 		public ResponseEntity<List<ClienteDTO>> findAll() {
-			List<Cliente> obj = service.findAll();
-			List<ClienteDTO> listadto = obj.stream().map(dados -> new ClienteDTO(dados)).collect(Collectors.toList());
-			return ResponseEntity.ok().body(listadto);
+			List<Cliente> list = service.findAll();
+			List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());  
+			return ResponseEntity.ok().body(listDto);
 		}
 
 		// metodo de busca por paginas
